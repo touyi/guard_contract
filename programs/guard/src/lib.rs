@@ -56,9 +56,18 @@ pub mod guard {
         cpi_discriminator.append(borsh::to_vec(&market_type).unwrap().as_mut());
         cpi_discriminator.append(borsh::to_vec(&market_flag).unwrap().as_mut());
 
+        let mut metas = ctx.accounts.to_account_metas(None);
+        for meta in metas.iter_mut() {
+            if meta.pubkey == ID {
+                meta.is_writable = true;
+                meta.is_signer = false;
+                meta.pubkey = *ctx.accounts.arb_program.key;
+            }
+        }
+        
         let ix = Instruction {
-            program_id: *ctx.program_id,
-            accounts: ctx.accounts.to_account_metas(None),
+            program_id: *ctx.accounts.arb_program.key,
+            accounts: metas,
             data: cpi_discriminator,
         };
 
@@ -97,9 +106,19 @@ pub mod guard {
         cpi_discriminator.append(borsh::to_vec(&market_type).unwrap().as_mut());
         cpi_discriminator.append(borsh::to_vec(&market_flag).unwrap().as_mut());
 
+
+        let mut metas = ctx.accounts.to_account_metas(None);
+        for meta in metas.iter_mut() {
+            if meta.pubkey == ID {
+                meta.is_writable = true;
+                meta.is_signer = false;
+                meta.pubkey = *ctx.accounts.arb_program.key;
+            }
+        }
+
         let ix = Instruction {
-            program_id: *ctx.program_id,
-            accounts: ctx.accounts.to_account_metas(None),
+            program_id: *ctx.accounts.arb_program.key,
+            accounts: metas,
             data: cpi_discriminator,
         };
 

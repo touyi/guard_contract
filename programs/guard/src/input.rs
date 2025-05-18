@@ -203,7 +203,7 @@ pub struct CommonAccountsInfo64<'info> {
     pub account_54: Option<UncheckedAccount<'info>>,
 
 
-    #[account(address = ARB_PROGRAM_ID)]
+    #[account(mut, address = ARB_PROGRAM_ID)]
     /// CHECK: NONE
     pub arb_program: AccountInfo<'info>,
 }
@@ -330,7 +330,7 @@ pub struct CommonAccountsInfo32<'info> {
     pub account_28: Option<UncheckedAccount<'info>>,
 
 
-    #[account(address = ARB_PROGRAM_ID)]
+    #[account(mut, address = ARB_PROGRAM_ID)]
     /// CHECK: NONE
     pub arb_program: AccountInfo<'info>,
 }
